@@ -1,0 +1,87 @@
+
+{% include "_header.html" %}
+
+<main class="x-landing">
+  <div class="x-landing__left">
+      <div class="x-landing__logo" aria-hidden="true">
+        <svg width="300" height="300.251" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/>
+        </svg>
+      </div>
+  </div>
+
+  <div class="x-landing__right">
+    
+    <div class="x-dialog__content">
+
+
+
+      <div class="d-flex gap-3">
+
+        {% if lan != "english": %}
+        <a href="/signup/english">
+          <img src="/static/images/flag_english.png" class="w-5">
+        </a>
+        {% endif %}
+
+        {% if lan != "danish": %}
+        <a href="/signup/danish">
+          <img src="/static/images/flag_danish.png" class="w-5">
+        </a>
+        {% endif %}
+
+        {% if lan != "spanish": %}
+        <a href="/signup/spanish">
+          <img src="/static/images/flag_spanish.png" class="w-5">
+        </a>
+        {% endif %}        
+
+      </div>
+
+        <h2 id="loginTitle">Sign up to X</h2>
+        <form class="x-dialog__form" action="{{ url_for('signup') }}" mix-post autocomplete="off">
+
+            <div>
+              <label for="user_email">
+                <span>
+                  {{ x.lans("email") }}
+                </span>
+              </label>
+              <input name="user_email" id="user_email" type="text" mix-check="{{ x.REGEX_EMAIL }}">
+            </div>
+            <div>
+              <label for="user_username">
+                <span>{{ x.lans("username") }}</span> - {{ x.USER_USERNAME_MIN }} to {{ x.USER_USERNAME_MAX }} characters
+              </label>
+              <input name="user_username" id="user_username" type="text" mix-check="{{ x.REGEX_USER_USERNAME }}">
+            </div>
+            <div>
+              <label for="user_first_name">
+                <span>{{ x.lans("first_name") }}</span> - {{ x.USER_FIRST_NAME_MIN }} to {{ x.USER_FIRST_NAME_MAX }} characters
+              </label>
+              <input name="user_first_name" id="user_first_name" type="text" mix-check="{{ x.REGEX_USER_USERNAME }}">
+            </div>            
+            <div>
+              <label for="password">
+                <span>{{ x.lans("password") }}</span> - {{ x.USER_PASSWORD_MIN }} to {{ x.USER_PASSWORD_MAX }} characters
+              </label>              
+              <input name="user_password" id="password" type="password" mix-check="{{ x.REGEX_USER_PASSWORD }}">
+            </div>
+            <button class="x-dialog__btn" 
+            mix-default="Sign up" 
+            mix-await="Signing up...">
+                Sign up
+            </button>
+        </form>
+        <p class="x-dialog__alt">
+            Have an account? 
+            <a href="{{ url_for('login') }}">Log in</a>
+        </p>
+    </div>
+
+
+  </div>
+
+</main>
+
+{% include "_footer.html" %}

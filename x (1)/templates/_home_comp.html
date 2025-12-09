@@ -1,0 +1,13 @@
+<div class="d-flex flex-row ma-2">
+    <div class="w-auto">
+        <img src="{{ url_for('static', filename='images/avatar_1.jpg') }}" class="w-8 rounded-full">
+    </div>
+    {% include "___post_container.html" %}
+</div>
+
+<div id="posts">
+
+    {% for tweet in tweets: %}
+    {% include "_tweet.html" %}
+    {% endfor %}
+</div>

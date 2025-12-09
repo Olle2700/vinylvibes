@@ -1,0 +1,29 @@
+<h1>
+    PROFILE
+</h1>
+
+<form class="x-dialog__form" action="{{ url_for('api_update_profile') }}" mix-post autocomplete="off">
+    <div>
+        <label for="user_email">
+        <span>Email</span>
+        </label>
+        <input name="user_email" id="user_email" type="text" mix-check="{{ x.REGEX_EMAIL }}" value="{{ user.user_email }}">
+    </div>
+    <div>
+        <label for="user_username">
+        <span>Username</span> - {{ x.USER_USERNAME_MIN }} to {{ x.USER_USERNAME_MAX }} characters
+        </label>
+        <input name="user_username" id="user_username" type="text" mix-check="{{ x.REGEX_USER_USERNAME }}" value="{{ user.user_username }}">
+    </div>
+    <div>
+        <label for="user_first_name">
+        <span>User first name</span> - {{ x.USER_FIRST_NAME_MIN }} to {{ x.USER_FIRST_NAME_MAX }} characters
+        </label>
+        <input name="user_first_name" id="user_first_name" type="text" mix-check="{{ x.REGEX_USER_USERNAME }}" value="{{ user.user_first_name }}">
+    </div>            
+    <button class="x-dialog__btn" 
+    mix-default="Update profile" 
+    mix-await="Updating profile ...">
+        Update profile
+    </button>
+</form>

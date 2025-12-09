@@ -1,0 +1,61 @@
+
+{% include "_header.html" %}
+
+<main class="x-landing">
+  <div class="x-landing__left">
+      <div class="x-landing__logo" aria-hidden="true">
+        <svg width="300" height="300.251" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/>
+        </svg>
+      </div>
+  </div>
+
+  <div class="x-landing__right">
+    
+
+
+    <div class="x-dialog__content">
+
+      <div class="d-flex gap-3">
+
+        {% if lan != "english": %}
+        <a href="/login/english">
+          <img src="/static/images/flag_english.png" class="w-5">
+        </a>
+        {% endif %}
+
+        {% if lan != "danish": %}
+        <a href="/login/danish">
+          <img src="/static/images/flag_danish.png" class="w-5">
+        </a>
+        {% endif %}
+
+        {% if lan != "spanish": %}
+        <a href="/login/spanish">
+          <img src="/static/images/flag_spanish.png" class="w-5">
+        </a>
+        {% endif %}        
+
+      </div>
+
+
+        <h2 id="loginTitle">Log in to X</h2>
+        <form action="/login/{{ lan }}" mix-post class="x-dialog__form" autocomplete="off">
+            <input name="user_email" type="text" placeholder="Email" mix-check="{{ x.REGEX_EMAIL }}">
+            <input name="user_password" type="password" placeholder="{{ dictionary.password[lan] }}">
+            <button class="x-dialog__btn" mix-default="Login" mix-await="Logging in ...">
+                {{ x.lans("login") }}
+            </button>
+        </form>
+        <p class="x-dialog__alt">
+            {{ x.lans("dont_have_an_account") }} ?
+            <a href="{{ url_for('signup') }}">Sign up</a>
+        </p>
+    </div>
+
+
+  </div>
+
+</main>
+
+{% include "_footer.html" %}

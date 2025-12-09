@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}VinylVibes · {{ dictionary.login[lan] }}{% endblock %}
+
+{% block content %}
+<section class="landing">
+  <div class="landing__hero">
+    <p class="eyebrow">Full-stack X clone · exam ready</p>
+    <h1>VinylVibes</h1>
+    <p class="lede">Share spins, likes, follows, and comments — with smooth, no-reload flows.</p>
+
+    <div class="cta-buttons">
+      <a class="btn btn-primary" href="{{ url_for('view_signup') }}">{{ dictionary.signup[lan] }}</a>
+      <a class="btn btn-secondary" href="{{ url_for('view_login') }}">{{ dictionary.login[lan] }}</a>
+    </div>
+  </div>
+
+  <div class="landing__grid">
+    <article class="feature">
+      <h3>Safe auth</h3>
+      <p>Front- and back-end validation, email verification, password reset, and session security.</p>
+    </article>
+    <article class="feature">
+      <h3>No reload UX</h3>
+      <p>Create, like, follow, comment, and search via light AJAX so feed stays live.</p>
+    </article>
+    <article class="feature">
+      <h3>Multi-language</h3>
+      <p>English, Danish, and Spanish strings you can sync from Google Sheets.</p>
+    </article>
+    <article class="feature">
+      <h3>Admin controls</h3>
+      <p>Block/unblock users/posts with email notices; sync translations in one click.</p>
+    </article>
+  </div>
+</section>
+{% endblock %}

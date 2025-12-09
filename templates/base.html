@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ lan or 'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+    <title>{% block title %}VinylVibes{% endblock %}</title>
+</head>
+<body data-lang="{{ lan }}">
+    <div id="toast-stack"></div>
+
+    {% include "components/header.html" %}
+
+    <main class="page-container">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "components/footer.html" %}
+</body>
+</html>

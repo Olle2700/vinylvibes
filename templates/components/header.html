@@ -1,0 +1,29 @@
+<header class="site-header">
+  <div class="logo">
+    <a href="{{ url_for('index') }}"><h1>VinylVibes</h1></a>
+  </div>
+
+  <button class="nav-toggle" aria-label="Toggle navigation">
+    ☰
+  </button>
+
+  <nav class="nav">
+    <a href="{{ url_for('home') }}">{{ dictionary.home_title[lan] }}</a>
+    {% if session_user %}
+      <a href="{{ url_for('profile') }}">{{ dictionary.profile_nav[lan] }}</a>
+      {% if session_user.user_role == 'admin' %}
+        <a href="{{ url_for('admin_home') }}">{{ dictionary.admin_panel[lan] }}</a>
+      {% endif %}
+      <a href="{{ url_for('logout') }}">{{ dictionary.logout[lan] }}</a>
+      <span class="nav-pill">@{{ session_user.user_username }}</span>
+    {% else %}
+      <a href="{{ url_for('view_login') }}">{{ dictionary.login[lan] }}</a>
+      <a class="btn btn-primary" href="{{ url_for('view_signup') }}">{{ dictionary.signup[lan] }}</a>
+    {% endif %}
+    <div class="language-switch">
+      {% for lang in ['english','danish','spanish'] %}
+        <a href="{{ url_for('set_lang', lan=lang) }}" class="{% if lan==lang %}active{% endif %}">{{ lang[0:2]|upper }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+</header>

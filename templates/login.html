@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Login · VinylVibes{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>{{ dictionary.login[lan] }}</h2>
+    <p class="auth-sub">Verify email, strong passwords, and server-side validation keep accounts safe.</p>
+    {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+
+    <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+        <label for="email">{{ dictionary.email_label[lan] }}</label>
+        <input id="email" name="email" type="email" required>
+
+        <label for="password">{{ dictionary.password_label[lan] }}</label>
+        <input id="password" name="password" type="password" required minlength="6">
+
+        <button type="submit" class="btn btn-primary">{{ dictionary.login[lan] }}</button>
+    </form>
+
+    <div class="auth-links">
+        <a href="{{ url_for('view_signup') }}">{{ dictionary.signup[lan] }}</a>
+        <a href="{{ url_for('view_forgot_password') }}">Forgot password?</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+services:
+  web:
+    build: .
+    container_name: vinylvibes_flask
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+    depends_on:
+      - mariadb
+    environment:
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+      - SECRET_KEY=${SECRET_KEY:-dev-secret-key}
+      - GOOGLE_SHEET_KEY=${GOOGLE_SHEET_KEY:-}
+
+  mariadb:
+    image: mariadb:10.6
+    container_name: vinylvibes_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: vinylvibes
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: vinylvibes_phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: password
+
+volumes:
+  mariadb_data:

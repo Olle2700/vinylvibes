@@ -1,0 +1,13 @@
+<div class="suggestion" data-user="{{ suggestion.user_pk }}">
+  <div class="suggestion__info">
+    {% set avatar_src = suggestion.user_avatar_path if suggestion.user_avatar_path.startswith('http') else '/' ~ suggestion.user_avatar_path %}
+    <img class="avatar tiny" src="{{ avatar_src }}" alt="Avatar">
+    <div>
+      <p class="name">{{ suggestion.user_first_name }} {{ suggestion.user_last_name }}</p>
+      <p class="handle">@{{ suggestion.user_username }}</p>
+    </div>
+  </div>
+  <button class="btn btn-secondary js-follow" data-user="{{ suggestion.user_pk }}" data-follow="{{ dictionary.follow[lan] }}" data-unfollow="{{ dictionary.unfollow[lan] }}">
+    {% if suggestion.following %}{{ dictionary.unfollow[lan] }}{% else %}{{ dictionary.follow[lan] }}{% endif %}
+  </button>
+</div>

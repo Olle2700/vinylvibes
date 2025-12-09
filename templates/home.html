@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Home · VinylVibes{% endblock %}
+
+{% block content %}
+<section class="home-grid">
+  <div class="feed-column">
+    <div class="card">
+      <h2>{{ dictionary.create_post[lan] }}</h2>
+      <form id="create-post-form" class="stack js-ajax" action="{{ url_for('create_post') }}" method="post" enctype="multipart/form-data" data-target="#feed" data-mode="prepend">
+        <textarea name="message" minlength="1" maxlength="280" required placeholder="{{ dictionary.create_post[lan] }}"></textarea>
+        <label class="file-label">
+          <i class="fa-solid fa-paperclip"></i>
+          <input type="file" name="media" accept="image/*,video/*,application/pdf,audio/*">
+          <span>Attach media (image / video / file)</span>
+        </label>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+
+    <div id="feed" class="feed-container">
+      {% for post in posts %}
+        {% set comments = comments_map.get(post.post_pk, []) %}
+        {% include "components/post_card.html" with context %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="card">
+      <form id="search_form" class="search js-search" action="{{ url_for('api_search') }}" method="post">
+        <input name="search_for" type="text" minlength="2" placeholder="{{ dictionary.search_placeholder[lan] }}">
+        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+      <div id="search_results" class="list-stack"></div>
+    </div>
+
+    <div class="card">
+      <h3>Who to follow</h3>
+      <div class="list-stack" id="suggestions">
+        {% for suggestion in suggestions %}
+          {% include "components/suggestion.html" %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Profile</h3>
+      <p class="muted">Edit your details and avatar on your profile page.</p>
+      <a class="btn btn-secondary w-full" href="{{ url_for('profile') }}">Go to profile</a>
+    </div>
+  </aside>
+</section>
+{% endblock %}

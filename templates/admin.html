@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Admin · VinylVibes{% endblock %}
+
+{% block content %}
+<section class="admin-grid">
+  <div class="card">
+    <div class="admin-header">
+      <h2>Users</h2>
+      <button class="btn btn-secondary js-sync" data-url="{{ url_for('sync_languages') }}">Sync languages</button>
+    </div>
+    <div class="list-stack">
+      {% for user in users %}
+        <div class="admin-row">
+          <div>
+            <p><strong>{{ user.user_first_name }}</strong> @{{ user.user_username }}</p>
+            <p class="muted">{{ user.user_email }}</p>
+          </div>
+          <form class="js-ajax" action="{{ url_for('block_user') }}" method="post" data-reload>
+            <input type="hidden" name="user_pk" value="{{ user.user_pk }}">
+            <input type="hidden" name="action" value="{{ 'unblock' if user.user_blocked_at else 'block' }}">
+            <button class="btn {{ 'btn-danger' if not user.user_blocked_at else 'btn-secondary' }}" type="submit">
+              {% if user.user_blocked_at %}Unblock{% else %}Block{% endif %}
+            </button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Posts</h2>
+    <div class="list-stack">
+      {% for post in posts %}
+        <div class="admin-row">
+          <div>
+            <p class="muted">@{{ post.post_user_fk }}</p>
+            <p>{{ post.post_message }}</p>
+          </div>
+          <form class="js-ajax" action="{{ url_for('block_post') }}" method="post" data-reload>
+            <input type="hidden" name="post_pk" value="{{ post.post_pk }}">
+            <input type="hidden" name="action" value="{{ 'unblock' if post.post_blocked_at else 'block' }}">
+            <button class="btn {{ 'btn-danger' if not post.post_blocked_at else 'btn-secondary' }}" type="submit">
+              {% if post.post_blocked_at %}Unblock{% else %}Block{% endif %}
+            </button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

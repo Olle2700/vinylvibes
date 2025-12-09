@@ -1,0 +1,71 @@
+#toast{
+    position: fixed; top: 0; left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    pointer-events: none;
+    z-index: 10;
+}
+.toast-ok{
+    margin: auto;
+    padding: 1rem 2rem;
+    color: white;
+    background-color: rgba(0, 120, 0, 1);
+    border-radius: 0.5rem;
+    animation: fadeOut 5s forwards;
+}
+.toast-error{
+    margin: auto;
+    padding: 1rem 2rem;
+    color: white;
+    background-color: rgba(190, 0, 0, 0.9);
+    border-radius: 0.5rem;
+    animation: fadeOut 5s ease-out;
+}
+
+#mix-cover{    
+    position: fixed; top:0rem; left:0;
+    width: 100vw;
+    height: 0.3rem;
+    background-color: rgb(6, 182, 212);
+    z-index: 20;
+}
+.mix-hidden{
+    display: none !important;
+}
+
+.mix-in{
+    display: none;
+    opacity: 0;
+} 
+
+/* .mix-fade-out {
+    animation: fadeOut 3s forwards;
+} */
+
+/* .mix-fade-in {
+    animation: fadeIn 3s forwards;
+} */
+
+.mix-error{
+    background-color: rgba(230,130,130, 0.5);
+}
+@keyframes mix-fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes mix-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+

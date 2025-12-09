@@ -1,0 +1,11 @@
+<div class="d-flex a-items-center">
+    <img src="{{ url_for('static', filename='images/' ~ (suggestion.user_avatar_path if suggestion.user_avatar_path else 'unknown.jpg')) }}" class="w-8 h-8 rounded-full" alt="Profile Picture">
+    <div class="w-full ml-2">
+        <p class="">
+            {{ suggestion.user_first_name }} {{ suggestion.user_last_name }}
+            <span class="text-c-gray:+20 text-70">@{{ suggestion.user_username }}</span>
+        </p>
+    
+    </div>
+    <button class="px-4 py-1 text-c-white bg-c-black rounded-lg">Follow</button>
+</div>

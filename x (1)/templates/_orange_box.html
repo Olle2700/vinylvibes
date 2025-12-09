@@ -1,0 +1,17 @@
+<div id="search_results" class="
+p-absolute top-8 left-0 w-full bg-c-white h-50 pa-4
+border-1 border-c-gray:+50 rounded-sm">
+    {% for user in users: %}
+        <div class="d-flex a-items-center">
+            <img src="{{ url_for('static', filename='images/' ~ (user.user_avatar_path if user.user_avatar_path else 'unknown.jpg')) }}" class="w-8 h-8 rounded-full" alt="Profile Picture">
+            <div class="w-full ml-2">
+                <p class="">
+                    {{ user.user_first_name }} {{ user.user_last_name }}
+                    <span class="text-c-gray:+20 text-70">@{{ user.user_username }}</span>
+                </p>
+            
+            </div>
+            <button class="px-4 py-1 text-c-white bg-c-black rounded-lg">Follow</button>
+        </div>
+    {% endfor %}
+</div>

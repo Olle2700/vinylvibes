@@ -1,0 +1,28 @@
+<article class="post" mix-fade-in="5000">
+    <img src="{{ url_for('static', filename='images/'~(tweet.user_avatar_path if tweet.user_avatar_path else 'unknown.jpg')) }}" alt="Profile Picture" 
+    class="w-8 h-8 rounded-full">
+    <div class="post-content">
+        <div class="post-header">
+            <span class="name">
+                {{ tweet.user_first_name }}
+                {{ tweet.user_last_name }}
+            </span>
+            <span class="handle">@{{ tweet.user_username }}</span> · <span class="time">1d</span>
+        </div>
+        <p class="text">
+            {{ tweet.post_message }}
+        </p>
+        {% if tweet.post_image_path: %}
+        <img src="{{ url_for('static', filename='images/' ~ tweet.post_image_path) }}" alt="Post image" 
+        class="w-80">
+        {% endif %}
+        
+        <div class="post-actions">
+            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
+            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
+            {% include "___button_like_tweet.html" %}
+            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
+            <span class="action"><i class="fa-solid fa-share"></i></span>
+        </div>
+    </div>
+</article>

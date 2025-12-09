@@ -1,0 +1,14 @@
+<div class="comment" data-comment="{{ comment.comment_pk }}">
+  {% set avatar_src = comment.user_avatar_path if comment.user_avatar_path.startswith('http') else '/' ~ comment.user_avatar_path %}
+  <img class="avatar tiny" src="{{ avatar_src }}" alt="Avatar">
+  <div class="comment-body">
+    <p class="comment-meta">
+      <strong>{{ comment.user_first_name }}</strong>
+      <span class="handle">@{{ comment.user_username }}</span>
+    </p>
+    <p>{{ comment.comment_body }}</p>
+  </div>
+  {% if session_user and (session_user.user_pk == comment.comment_user_fk or session_user.user_role == 'admin') %}
+    <button class="icon-btn js-delete" data-url="{{ url_for('delete_comment', comment_pk=comment.comment_pk) }}"><i class="fa-solid fa-xmark"></i></button>
+  {% endif %}
+</div>

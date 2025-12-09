@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mixhtml.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+
+    <script src="https://unpkg.com/mojocss"></script>
+
+    <title>
+        Fresh news        
+    </title>
+</head>
+
+<body m-load style="display:none">
+
+    <div id="toast"></div>
+
+    <div id="container">
+        <button class="burger" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+
+
+                <li>
+                    <a href="/home-comp" mix-get><i class="fa-solid fa-house"></i>
+                        <span class="pointer-e-none">Home</span>
+                    </a>
+                </li>
+
+
+                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i><span>Explore</span></a></li>
+                <li><a href="#"><i class="fa-regular fa-bell"></i><span>Notifications</span></a></li>
+                <li><a href="#"><i class="fa-regular fa-envelope"></i><span>Messages</span></a></li>
+                <li><a href="#"><i class="fa-solid fa-atom"></i><span>Grok</span></a></li>
+                <li><a href="#"><i class="fa-regular fa-bookmark"></i><span>Bookmarks</span></a></li>
+                <li><a href="#"><i class="fa-solid fa-briefcase"></i><span>Jobs</span></a></li>
+                <li><a href="#"><i class="fa-solid fa-users"></i><span>Communities</span></a></li>
+                <li><a href="#"><i class="fa-solid fa-star"></i><span>Premium</span></a></li>
+
+                <li>
+                    <a href="/profile" mix-get mix-default="<i class='fa-regular fa-user'></i> Profile" mix-await="Loading ...">
+                        <i class="fa-regular fa-user"></i>
+                        <span class="pointer-e-none">Profile</span>
+                    </a>
+                </li>
+
+                <li><a href="#"><i class="fa-solid fa-ellipsis"></i><span>More</span></a></li>
+                <li><a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></li>
+            </ul>
+
+            <button class="post-btn">Post</button>
+
+            <div id="profile_tag">
+                <img src="{{ url_for('static', filename='images/avatar_1.jpg') }}" alt="Profile">
+                <div>
+                    <div class="name">
+                        {{ user.user_first_name }}
+                    </div>
+                    <div class="handle">
+                        @{{ user.user_username }} 
+                    </div>
+                </div>
+                <i class="fa-solid fa-ellipsis option"></i>
+            </div>
+        </nav>
+
+        <main class="px-4">
+
+            {% include "_home_comp.html" %}
+        </main>
+
+        <aside>
+            <form id="search_form" class="p-relative">
+                <!-- <input mix-post="/api-search" mix-input mix-delay="300" name="search_for" type="text" placeholder="Search Twitter"> -->
+                <input id="txt_search_for" name="search_for" type="text" placeholder="Search Twitter" 
+                oninput="get_search_results('/api-search', 'post', '#search_form', 'parse_search_results')">
+                <button class="cursor-pointer">Search</button>                             
+            
+                <div id="search_results" class="
+                d-none
+                p-absolute top-8 left-0 w-full bg-c-white h-50 pa-4
+                border-1 border-c-gray:+50 rounded-sm">
+                </div>
+            </form>
+
+            <div class="border-1 border-c-gray:+50 rounded-md pa-3">
+                <h2 class="text-120 text-c-black text-w-bold">What's happening now</h2>
+                <div class="">
+                    {% for trend in trends: %}
+                        {% include "_trend.html" %}
+                    {% endfor  %}
+                    <button class="text-c-tealblue text-90">More news</button>
+                </div>
+
+            </div>
+        
+            <div class="mt-2 border-c-gray:+50 border-1 rounded-md pa-2">
+                <h2 class="text-120 text-w-bold">Who to follow</h2>
+                <div class="">
+
+                    {% for suggestion in suggestions: %}
+                        {% include "_who_to_follow.html" %}
+                    {% endfor %}
+
+                    <button class="text-c-tealblue text-90">Show more</button>
+                </div>
+        </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='mixhtml.js') }}"></script>
+
+    <script>
+      mojo()
+    </script>
+
+</body>
+</html>

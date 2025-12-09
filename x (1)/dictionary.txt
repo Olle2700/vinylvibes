@@ -1,0 +1,15 @@
+"hi": {
+                    "english": "hi",
+                    "danish": "hej",
+                    "spanish": "hola"
+                }
+"login": {
+                    "english": "log in",
+                    "danish": "log ind",
+                    "spanish": "entrar"
+                }
+"logout": {
+                    "english": "log out",
+                    "danish": "logge ud",
+                    "spanish": "salir"
+                }

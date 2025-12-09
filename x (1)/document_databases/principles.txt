@@ -1,0 +1,143 @@
+collection = table
+document = row
+many = array
+embedding
+referencing
+[{},{},{}]
+
+ENBEDDING
+
+pets
+[
+    {
+        "id":"1",
+        "name":"Fiddo",
+        "nick_name":"xxxx",
+        "owners":[
+            {
+                    "user_id":"111",
+                    "user_first_name":"A"
+                    "user_email":"a@a.com",
+                    "user_age":10,
+                    "user_phones":["111", "222"],                                          
+                    ]
+                }            
+        ]
+    }
+
+]
+
+
+
+
+
+users
+[
+    {
+        "user_id":"111",
+        "user_pets":[
+            {
+                "id":"1",
+                "name":"Fiddo",
+                "owners":[]
+            }            
+        ]
+        "user_likes_car_brands":["x","x","x"]
+        "user_pssword":"password",
+        "user_first_name":"A"
+        "user_email":"a@a.com",
+        "user_age":10,
+        "user_favorite_colors":["green"],
+        "user_phones":["111", "222"],
+        "user_friends":[
+            {
+                "user_id":"222",                
+                "user_first_name":"B"
+                "user_email":"b@b.com",
+                "user_age":20,
+                "user_favorite_colors":[],
+                "user_phones":[]
+            },  
+            {
+                "user_id":"333",                
+                "user_first_name":"Ccc"
+                "user_email":"c@c.com",
+                "user_age":30,
+                "user_favorite_colors":["blue", "green"],
+                "user_phones":["331", "332", "333]
+            }                                
+        ]
+    },
+
+
+
+
+
+
+
+
+    {
+        "user_id":"222",
+        "user_password":"password",
+        "user_first_name":"B"
+        "user_email":"b@b.com",
+        "user_age":20,
+        "user_favorite_colors":[],
+        "user_phones":[],
+        "user_friends":[
+            {
+                "user_id":"333",                
+                "user_first_name":"Ccc"
+                "user_email":"c@c.com",
+                "user_age":30,
+                "user_favorite_colors":["blue", "green"],
+                "user_phones":["331", "332", "333]
+            }                
+        ]
+    },
+
+
+
+
+
+
+    {
+        "user_id":"333",
+        "user_password":"password",
+        "user_first_name":"Ccc"
+        "user_email":"c@c.com",
+        "user_age":30,
+        "user_favorite_colors":["blue", "green"],
+        "user_phones":["331", "332", "333]
+    }    
+]
+
+
+
+REFERENCING
+[
+    {
+        "id":"1",
+        "name":"A"
+        "password":"password",
+        "friends":[2,3]
+    },
+
+    {
+        "id":"2",
+        "name":"B"
+        "password":"password",
+        "friends":[]
+    },
+
+    {
+        "id":"3",
+        "name":"C"
+        "password":"password",
+        "friends":[]
+    }    
+
+
+]
+
+horizontal scaling

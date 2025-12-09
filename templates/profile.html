@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Profile · VinylVibes{% endblock %}
+
+{% block content %}
+<section class="profile-grid">
+  <div class="card">
+    <h2>Profile</h2>
+    <p class="muted">Update your account details.</p>
+    <form class="stack js-ajax" action="{{ url_for('update_profile') }}" method="post">
+      <label>Email</label>
+      <input name="email" type="email" value="{{ user.user_email }}" required>
+      <label>Username</label>
+      <input name="username" type="text" value="{{ user.user_username }}" minlength="3" maxlength="20" required>
+      <label>First name</label>
+      <input name="first_name" type="text" value="{{ user.user_first_name }}" minlength="2" maxlength="40" required>
+      <label>Last name</label>
+      <input name="last_name" type="text" value="{{ user.user_last_name }}" maxlength="40">
+      <label>Bio</label>
+      <textarea name="bio" maxlength="160" placeholder="Bio">{{ user.user_bio or '' }}</textarea>
+      <button class="btn btn-primary" type="submit">Save changes</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Avatar</h2>
+    <p class="muted">Upload a new avatar image.</p>
+    <form class="stack js-ajax" action="{{ url_for('update_avatar') }}" method="post" enctype="multipart/form-data" data-avatar-preview="#avatar_preview">
+      {% set avatar_src = user.user_avatar_path if user.user_avatar_path.startswith('http') else '/' ~ user.user_avatar_path %}
+      <div class="avatar-row">
+        <img id="avatar_preview" src="{{ avatar_src }}" alt="Avatar">
+        <label class="file-label"><input type="file" name="avatar" accept="image/*" required>Choose image</label>
+      </div>
+      <button class="btn btn-secondary" type="submit">Upload</button>
+    </form>
+  </div>
+
+  <div class="card danger-card">
+    <h2>Danger zone</h2>
+    <p class="muted">Delete your account and all related data.</p>
+    <form class="stack js-ajax" action="{{ url_for('delete_account') }}" method="post" data-confirm="Delete account and all posts?">
+      <button class="btn btn-danger" type="submit">{{ dictionary.delete_account[lan] }}</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

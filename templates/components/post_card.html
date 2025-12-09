@@ -1,0 +1,50 @@
+<article class="post-card" data-post="{{ post.post_pk }}">
+  <header class="post-top">
+    <div class="post-author">
+      {% set avatar_src = post.user_avatar_path if post.user_avatar_path.startswith('http') else '/' ~ post.user_avatar_path %}
+      <img class="avatar" src="{{ avatar_src }}" alt="Avatar">
+      <div>
+        <p class="name">{{ post.user_first_name }} {{ post.user_last_name }}</p>
+        <p class="handle">@{{ post.user_username }}</p>
+      </div>
+    </div>
+    {% if session_user and (session_user.user_pk == post.post_user_fk or session_user.user_role == 'admin') %}
+      <div class="post-actions">
+        <button class="icon-btn js-edit-post" data-post="{{ post.post_pk }}"><i class="fa-solid fa-pen"></i></button>
+        <button class="icon-btn js-delete" data-url="{{ url_for('delete_post', post_pk=post.post_pk) }}"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    {% endif %}
+  </header>
+
+  <p class="post-message" data-content>{{ post.post_message }}</p>
+  {% if post.post_image_path %}
+    {% set media_path = post.post_image_path if post.post_image_path.startswith('http') else '/' ~ post.post_image_path %}
+    {% if post.post_image_path.endswith('mp4') or post.post_image_path.endswith('mov') %}
+      <video class="post-image" controls src="{{ media_path }}"></video>
+    {% elif post.post_image_path.endswith('pdf') %}
+      <a class="file-pill" href="{{ media_path }}" target="_blank"><i class="fa-solid fa-file"></i> Attachment</a>
+    {% else %}
+      <img class="post-image" src="{{ media_path }}" alt="Post media">
+    {% endif %}
+  {% endif %}
+
+  <div class="post-meta">
+    <button class="icon-btn js-like" data-post="{{ post.post_pk }}" aria-pressed="{{ 1 if post.liked_by_me else 0 }}">
+      <i class="fa-{{ 'solid' if post.liked_by_me else 'regular' }} fa-heart"></i>
+      <span class="like-count">{{ post.like_count or post.post_total_likes }}</span>
+    </button>
+    <span class="dot">•</span>
+    <span><span class="comment-count">{{ post.comment_count or 0 }}</span> comments</span>
+  </div>
+
+  <form class="comment-form js-ajax" action="{{ url_for('add_comment', post_pk=post.post_pk) }}" method="post" data-target="#comments_{{ post.post_pk }}">
+    <input name="comment" type="text" maxlength="240" required placeholder="{{ dictionary.comment_placeholder[lan] }}">
+    <button type="submit" class="btn btn-secondary">Reply</button>
+  </form>
+
+  <div class="comments" id="comments_{{ post.post_pk }}">
+    {% for comment in comments %}
+      {% include "components/comment.html" %}
+    {% endfor %}
+  </div>
+</article>

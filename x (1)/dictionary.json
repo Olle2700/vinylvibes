@@ -1,0 +1,42 @@
+{
+    "hi": {
+        "english": "hi",
+        "danish": "hej",
+        "spanish": "hola"
+    },
+    "login": {
+        "english": "log in",
+        "danish": "log ind",
+        "spanish": "entrar"
+    },
+    "logout": {
+        "english": "log out",
+        "danish": "logge ud",
+        "spanish": "salir"
+    },
+    "email": {
+        "english": "email",
+        "danish": "email",
+        "spanish": "correo electrónico"
+    },
+    "username": {
+        "english": "username",
+        "danish": "brugenavn",
+        "spanish": "nombre de usuario"
+    },
+    "first_name": {
+        "english": "surname",
+        "danish": "fornavn",
+        "spanish": "primer nombre"
+    },
+    "password": {
+        "english": "password",
+        "danish": "pinkode",
+        "spanish": "clave"
+    },
+    "dont_have_an_account": {
+        "english": "don't have an account",
+        "danish": "Hhar du ikke en konto",
+        "spanish": "no tengo cuenta"
+    }
+}
